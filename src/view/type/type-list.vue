@@ -2,7 +2,7 @@
   <div>
     <!-- 列表页面 -->
     <div class="container" v-if="!showEdit">
-      <div class="header"><div class="title">视频列表</div></div>
+      <div class="header"><div class="title">视频分类列表</div></div>
       <!-- 表格 -->
       <lin-table
         :tableColumn="tableColumn"
@@ -17,62 +17,55 @@
     </div>
 
     <!-- 编辑页面 -->
-    <vedio-modify v-else @editClose="editClose" :editVedioID="editVedioID"></vedio-modify>
+    <type-modify v-else @editClose="editClose" :editTypeID="editTypeID"></type-modify>
   </div>
 </template>
 
 <script>
-import vedio from '@/model/vedio'
+import type from '@/model/type'
 import LinTable from '@/component/base/table/lin-table'
-import VedioModify from './vedio-modify'
+import TypeModify from './type-modify'
 
 export default {
   components: {
     LinTable,
-    VedioModify,
+    TypeModify,
   },
   data() {
     return {
-      tableColumn: [
-        { prop: 'typeName', label: '视频分类' },
-        { prop: 'title', label: '视频名称' },
-        { prop: 'author', label: '视频作者' },
-        { prop: 'author', label: '视频封面' },
-        { prop: 'url', label: '视频链接' },
-        { prop: 'price', label: '视频单价(元)' },
-      ],
+      tableColumn: [{ prop: 'name', label: '名称' }, { prop: 'order', label: '排序' }],
       tableData: [],
       operate: [],
       showEdit: false,
-      editVedioID: 1,
+      editTypeID: 1,
       pagination: {
         pageSize: 10,
         pageTotal: null,
         currentPage: 1,
       },
+      loading: false,
     }
   },
   async created() {
     this.loading = true
-    await this.getVedios()
+    await this.getTypes()
     this.operate = [
       { name: '编辑', func: 'handleEdit', type: 'primary' },
       {
         name: '删除',
         func: 'handleDelete',
         type: 'danger',
-        permission: '删除视频',
+        permission: '删除分类',
       },
     ]
     this.loading = false
   },
   methods: {
-    async getVedios() {
+    async getTypes() {
       try {
-        const vedios = await vedio.getVedios()
-        console.log(vedios)
-        this.pagination.pageTotal = vedios.count
-        this.tableData = vedios.rows
+        const types = await type.getTypes()
+        this.pagination.pageTotal = types.count
+        this.tableData = types.rows
       } catch (error) {
         if (error.code === 10020) {
           this.tableData = []
@@ -82,17 +75,17 @@ export default {
     handleEdit(val) {
       console.log('val', val)
       this.showEdit = true
-      this.editVedioID = val.row.id
+      this.editTypeID = val.row.id
     },
     handleDelete(val) {
-      this.$confirm('此操作将永久删除该视频, 是否继续?', '提示', {
+      this.$confirm('此操作将永久删除该分类, 是否继续?', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning',
       }).then(async () => {
-        const res = await vedio.deleteVedio(val.row.id)
+        const res = await type.deleteType(val.row.id)
         if (res.code < window.MAX_SUCCESS_CODE) {
-          this.getVedios()
+          this.getTypes()
           this.$message({
             type: 'success',
             message: `${res.message}`,
@@ -103,10 +96,9 @@ export default {
     rowClick() {},
     editClose() {
       this.showEdit = false
-      this.getVedios()
+      this.getTypes()
     },
   },
-  watch: {},
 }
 </script>
 

@@ -1,6 +1,8 @@
 import adminConfig from './admin'
 import bookConfig from './book' // 引入图书管理路由文件
 import vedioConfig from './vedio' // 引入视频管理路由文件
+import orderConfig from './order' // 引入视频管理路由文件
+import typeConfig from './type' // 引入视频管理路由文件
 import pluginsConfig from './plugin'
 import Utils from '@/lin/util/util'
 
@@ -48,6 +50,8 @@ let homeRouter = [
   bookConfig,
   adminConfig,
   vedioConfig,
+  orderConfig,
+  typeConfig,
 ]
 
 const plugins = [...pluginsConfig]
