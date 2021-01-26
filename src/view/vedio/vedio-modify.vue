@@ -40,8 +40,8 @@
                 />
               </div>
             </el-form-item>
-            <el-form-item label="视频单价" prop="prce">
-              <el-input size="medium" v-model="form.prce" placeholder="请填写视频单价"></el-input>
+            <el-form-item label="视频单价" prop="price">
+              <el-input size="medium" v-model="form.price" placeholder="请填写视频单价"></el-input>
             </el-form-item>
             <el-form-item class="submit">
               <el-button type="primary" @click="submitForm('form')">保 存</el-button>

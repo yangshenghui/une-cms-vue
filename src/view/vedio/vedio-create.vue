@@ -120,7 +120,6 @@ export default {
       this.imageUrl = URL.createObjectURL(file.raw)
       this.form.image = this.qiniuSite + response.key
       this.$message.success('视频封面上传成功!')
-      console.log(this.form)
     },
     uploadError(err, file, fileList) {
       console.log('上传失败')
@@ -134,22 +133,24 @@ export default {
     // 请求后台拿七牛云token
     async getQiniuToken() {
       const res = await qiniu.getToken()
-      console.log(`qiniutoken:${ res.uptoken}`)
+      console.log('七牛云token')
+      console.log(res.uptoken)
       this.postData = {
         token: res.uptoken,
       }
     },
     tinymceChange(val) {
-      console.log(val)
+      console.log("富文本")
+      console.log("val")
       this.form.summary = val
     },
     async submitForm(formName) {
+      console.log("表单的值")
       console.log(this.form)
       try {
         this.loading = true
         const res = await vedio.createVedio(this.form)
         this.loading = false
-        console.log(res)
         if (res.code < window.MAX_SUCCESS_CODE) {
           this.$message.success(`${res.message}`)
           this.resetForm(formName)
@@ -167,8 +168,9 @@ export default {
     },
     async getTypes() {
       const types = await type.getTypes()
+      console.log("视频分类")
       console.log(types)
-      this.types = types
+      this.types = types.rows
     },
   },
   async created() {
