@@ -1,22 +1,11 @@
 <template>
   <div class="container">
-    <div class="title">新建视频</div>
+    <div class="title">新建广告</div>
     <div class="wrap">
       <el-row>
         <el-col :lg="16" :md="20" :sm="24" :xs="24">
           <el-form :model="form" status-icon ref="form" label-width="100px" @submit.native.prevent>
-            <el-form-item label="视频分类" prop="typeId">
-              <el-select size="medium" v-model="form.typeId" placeholder="请选择">
-                <el-option v-for="item in types" :key="item.id" :label="item.name" :value="item.id"> </el-option>
-              </el-select>
-            </el-form-item>
-            <el-form-item label="视频名称" prop="title">
-              <el-input size="medium" v-model="form.title" placeholder="请填写书名"></el-input>
-            </el-form-item>
-            <el-form-item label="视频作者" prop="author">
-              <el-input size="medium" v-model="form.author" placeholder="请填写作者"></el-input>
-            </el-form-item>
-            <el-form-item label="视频封面" prop="image">
+            <el-form-item label="广告封面" prop="image">
               <!-- <el-upload
                 :action="actionUrl"
                 list-type="avatar-uploader"
@@ -47,16 +36,11 @@
                 <i v-else class="el-icon-plus avatar-uploader-icon"></i>
               </el-upload>
             </el-form-item>
-            <el-form-item label="视频链接" prop="url">
-              <el-input size="medium" v-model="form.url" placeholder="请填写视频链接"></el-input>
+            <el-form-item label="广告链接" prop="url">
+              <el-input size="medium" v-model="form.url" placeholder="请填写广告链接"></el-input>
             </el-form-item>
-            <el-form-item label="视频简介" prop="summary">
-              <div class="lin-wrap">
-                <tinymce @change="tinymceChange" upload_url="http://localhost:5000/cms/file/" />
-              </div>
-            </el-form-item>
-            <el-form-item label="视频单价(元)" prop="price">
-              <el-input size="medium" v-model="form.price" placeholder="请填写视频单价"></el-input>
+            <el-form-item label="广告排序" prop="order">
+              <el-input size="medium" v-model="form.order" placeholder="请填写广告排序"></el-input>
             </el-form-item>
             <el-form-item class="submit">
               <el-button type="primary" @click="submitForm('form')" :loading="loading">保 存</el-button>
@@ -70,28 +54,19 @@
 </template>
 
 <script>
-import vedio from '@/model/vedio'
-import type from '@/model/type'
+import swipe from '@/model/swipe'
 import qiniu from '@/model/qiniu'
-import Tinymce from '@/component/base/tinymce'
 
 export default {
-  components: {
-    Tinymce,
-  },
   data() {
     return {
       actionUrl: 'https://upload-z2.qiniup.com',
       postData: {},
       imageUrl: '',
       form: {
-        typeId: '',
-        title: '',
-        author: '',
-        summary: '',
         image: '',
         url: '',
-        price: '',
+        order: '',
       },
       types: [],
       loading: false,
@@ -139,17 +114,12 @@ export default {
         token: res.uptoken,
       }
     },
-    tinymceChange(val) {
-      console.log('富文本')
-      console.log('val')
-      this.form.summary = val
-    },
     async submitForm(formName) {
       console.log('表单的值')
       console.log(this.form)
       try {
         this.loading = true
-        const res = await vedio.createVedio(this.form)
+        const res = await swipe.createSwipe(this.form)
         this.loading = false
         if (res.code < window.MAX_SUCCESS_CODE) {
           this.$message.success(`${res.message}`)
@@ -157,7 +127,7 @@ export default {
         }
       } catch (error) {
         this.loading = false
-        this.$message.error('视频添加失败，请检测填写信息')
+        this.$message.error('广告添加失败，请检测填写信息')
         console.log(error)
       }
     },
@@ -166,16 +136,9 @@ export default {
       this.$refs[formName].resetFields()
       this.imageUrl = ''
     },
-    async getTypes() {
-      const types = await type.getTypes()
-      console.log('视频分类')
-      console.log(types)
-      this.types = types.rows
-    },
   },
   async created() {
     await this.getQiniuToken()
-    await this.getTypes()
   },
 }
 </script>
