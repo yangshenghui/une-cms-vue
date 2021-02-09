@@ -56,7 +56,7 @@ export default {
       form: {
         image: '',
         url: '',
-        order: ''
+        order: '',
       },
       loading: false,
       qiniuSite: 'http://qmmb7uflf.hn-bkt.clouddn.com/',

@@ -2,7 +2,7 @@
   <div>
     <!-- 列表页面 -->
     <div class="container" v-if="!showEdit">
-      <div class="header"><div class="title">广告列表</div></div>
+      <div class="header"><div class="title">资料列表</div></div>
       <!-- 表格 -->
       <lin-table
         :tableColumn="tableColumn"
@@ -17,32 +17,31 @@
     </div>
 
     <!-- 编辑页面 -->
-    <swipe-modify v-else @editClose="editClose" :editSwipeID="editSwipeID"></swipe-modify>
+    <read-modify v-else @editClose="editClose" :editReadID="editReadID"></read-modify>
   </div>
 </template>
 
 <script>
-import swipe from '@/model/swipe'
+import read from '@/model/read'
 import LinTable from '@/component/base/table/lin-table'
-import SwipeModify from './swipe-modify'
+import ReadModify from './read-modify'
 
 export default {
   components: {
     LinTable,
-    SwipeModify,
+    ReadModify,
   },
   data() {
     return {
       tableColumn: [
         { prop: 'id', label: '序号' },
-        { prop: 'image', label: '广告封面' },
-        { prop: 'url', label: '广告链接' },
-        { prop: 'order', label: '广告排序' },
+        { prop: 'name', label: '资料名称' },
+        { prop: 'url', label: '资料链接' },
       ],
       tableData: [],
       operate: [],
       showEdit: false,
-      editSwipeID: 1,
+      editReadID: 1,
       pagination: {
         pageSize: 10,
         pageTotal: null,
@@ -52,25 +51,25 @@ export default {
   },
   async created() {
     this.loading = true
-    await this.getSwipes()
+    await this.getReads()
     this.operate = [
       { name: '编辑', func: 'handleEdit', type: 'primary' },
       {
         name: '删除',
         func: 'handleDelete',
         type: 'danger',
-        permission: '删除广告',
+        permission: '删除资料',
       },
     ]
     this.loading = false
   },
   methods: {
-    async getSwipes() {
+    async getReads() {
       try {
-        const swipes = await swipe.getSwipes()
-        console.log(swipes)
-        this.pagination.pageTotal = swipes.count
-        this.tableData = swipes.rows
+        const reads = await read.getReads()
+        console.log(reads)
+        this.pagination.pageTotal = reads.count
+        this.tableData = reads.rows
       } catch (error) {
         if (error.code === 10020) {
           this.tableData = []
@@ -80,7 +79,7 @@ export default {
     handleEdit(val) {
       console.log('val', val)
       this.showEdit = true
-      this.editSwipeID = val.row.id
+      this.editReadID = val.row.id
     },
     handleDelete(val) {
       this.$confirm('此操作将永久删除该广告, 是否继续?', '提示', {
@@ -88,9 +87,9 @@ export default {
         cancelButtonText: '取消',
         type: 'warning',
       }).then(async () => {
-        const res = await swipe.deleteSwipe(val.row.id)
+        const res = await read.deleteRead(val.row.id)
         if (res.code < window.MAX_SUCCESS_CODE) {
-          this.getSwipes()
+          this.getReads()
           this.$message({
             type: 'success',
             message: `${res.message}`,
@@ -101,7 +100,7 @@ export default {
     rowClick() {},
     editClose() {
       this.showEdit = false
-      this.getSwipes()
+      this.getReads()
     },
   },
   watch: {},

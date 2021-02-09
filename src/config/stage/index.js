@@ -4,6 +4,8 @@ import vedioConfig from './vedio' // 引入视频管理路由文件
 import orderConfig from './order' // 引入视频管理路由文件
 import typeConfig from './type' // 引入视频管理路由文件
 import swipeConfig from './swipe' // 引入视频管理路由文件
+import readConfig from './read' // 引入视频管理路由文件
+
 import pluginsConfig from './plugin'
 import Utils from '@/lin/util/util'
 
@@ -19,17 +21,17 @@ let homeRouter = [
     icon: 'iconfont icon-iconset0103',
     order: 1,
   },
-  {
-    title: '日志管理',
-    type: 'view',
-    name: Symbol('log'),
-    route: '/log',
-    filePath: 'view/log/log.vue',
-    inNav: true,
-    icon: 'iconfont icon-rizhiguanli',
-    order: 2,
-    permission: ['查询所有日志'],
-  },
+  // {
+  //   title: '日志管理',
+  //   type: 'view',
+  //   name: Symbol('log'),
+  //   route: '/log',
+  //   filePath: 'view/log/log.vue',
+  //   inNav: true,
+  //   icon: 'iconfont icon-rizhiguanli',
+  //   order: 2,
+  //   permission: ['查询所有日志'],
+  // },
   {
     title: '个人中心',
     type: 'view',
@@ -48,12 +50,13 @@ let homeRouter = [
     inNav: false,
     icon: 'iconfont icon-rizhiguanli',
   },
-  bookConfig,
+  // bookConfig,
   adminConfig,
   vedioConfig,
-  orderConfig,
+  // orderConfig,
   typeConfig,
-  swipeConfig
+  swipeConfig,
+  readConfig
 ]
 
 const plugins = [...pluginsConfig]
@@ -80,7 +83,7 @@ function filterPlugin(data) {
 
 filterPlugin(homeRouter)
 
-homeRouter = homeRouter.concat(plugins)
+// homeRouter = homeRouter.concat(plugins)
 
 // 处理顺序
 homeRouter = Utils.sortByOrder(homeRouter)
