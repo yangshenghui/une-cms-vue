@@ -95,7 +95,7 @@ export default {
       },
       types: [],
       loading: false,
-      qiniuSite: 'http://qmmb7uflf.hn-bkt.clouddn.com/',
+      qiniuSite: 'http://une.sven-it.com/',
     }
   },
   methods: {
