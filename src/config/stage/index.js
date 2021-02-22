@@ -11,27 +11,27 @@ import Utils from '@/lin/util/util'
 
 // eslint-disable-next-line import/no-mutable-exports
 let homeRouter = [
-  {
-    title: '林间有风',
-    type: 'view',
-    name: Symbol('about'),
-    route: '/about',
-    filePath: 'view/about/about.vue',
-    inNav: true,
-    icon: 'iconfont icon-iconset0103',
-    order: 1,
-  },
   // {
-  //   title: '日志管理',
+  //   title: '林间有风',
   //   type: 'view',
-  //   name: Symbol('log'),
-  //   route: '/log',
-  //   filePath: 'view/log/log.vue',
+  //   name: Symbol('about'),
+  //   route: '/about',
+  //   filePath: 'view/about/about.vue',
   //   inNav: true,
-  //   icon: 'iconfont icon-rizhiguanli',
-  //   order: 2,
-  //   permission: ['查询所有日志'],
+  //   icon: 'iconfont icon-iconset0103',
+  //   order: 1,
   // },
+  {
+    title: '日志管理',
+    type: 'view',
+    name: Symbol('log'),
+    route: '/log',
+    filePath: 'view/log/log.vue',
+    inNav: true,
+    icon: 'iconfont icon-rizhiguanli',
+    order: 2,
+    permission: ['查询所有日志'],
+  },
   {
     title: '个人中心',
     type: 'view',
@@ -56,7 +56,7 @@ let homeRouter = [
   // orderConfig,
   typeConfig,
   swipeConfig,
-  readConfig
+  readConfig,
 ]
 
 const plugins = [...pluginsConfig]
