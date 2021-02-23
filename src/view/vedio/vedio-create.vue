@@ -50,6 +50,9 @@
             <el-form-item label="视频链接" prop="url">
               <el-input size="medium" v-model="form.url" placeholder="请填写视频链接"></el-input>
             </el-form-item>
+            <el-form-item label="文档链接" prop="pdfurl">
+              <el-input size="medium" v-model="form.pdfurl" placeholder="请填写文档链接"></el-input>
+            </el-form-item>
             <el-form-item label="视频简介" prop="summary">
               <div class="lin-wrap">
                 <tinymce @change="tinymceChange" upload_url="http://localhost:5000/cms/file/" />
@@ -91,6 +94,7 @@ export default {
         summary: '',
         image: '',
         url: '',
+        pdfurl: '',
         price: '',
       },
       types: [],
