@@ -41,6 +41,7 @@
 
 <script>
 import swipe from '@/model/swipe'
+import qiniu from '@/model/qiniu'
 
 export default {
   props: {
@@ -66,6 +67,7 @@ export default {
     this.loading = true
     this.form = await swipe.getSwipe(this.editSwipeID)
     this.imageUrl = this.form.image
+    await this.getQiniuToken()
     this.loading = false
   },
   methods: {
@@ -100,6 +102,15 @@ export default {
         type: 'error',
         center: true,
       })
+    },
+    // 请求后台拿七牛云token
+    async getQiniuToken() {
+      const res = await qiniu.getToken()
+      console.log('七牛云token')
+      console.log(res.uptoken)
+      this.postData = {
+        token: res.uptoken,
+      }
     },
     async submitForm() {
       const res = await swipe.editSwipe(this.editSwipeID, this.form)

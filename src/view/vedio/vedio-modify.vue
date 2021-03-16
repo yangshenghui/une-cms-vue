@@ -59,6 +59,7 @@
 
 <script>
 import vedio from '@/model/vedio'
+import qiniu from '@/model/qiniu'
 import Tinymce from '@/component/base/tinymce'
 
 export default {
@@ -94,6 +95,7 @@ export default {
     this.form = await vedio.getVedio(this.editVedioID)
     this.imageUrl = this.form.image
     this.defaultContent = this.form.summary
+    await this.getQiniuToken()
     this.loading = false
   },
   methods: {
@@ -128,6 +130,15 @@ export default {
         type: 'error',
         center: true,
       })
+    },
+    // 请求后台拿七牛云token
+    async getQiniuToken() {
+      const res = await qiniu.getToken()
+      console.log('七牛云token')
+      console.log(res.uptoken)
+      this.postData = {
+        token: res.uptoken,
+      }
     },
     tinymceChange(val) {
       console.log(val)
