@@ -5,6 +5,9 @@ import orderConfig from './order' // 引入视频管理路由文件
 import typeConfig from './type' // 引入视频管理路由文件
 import swipeConfig from './swipe' // 引入视频管理路由文件
 import readConfig from './read' // 引入视频管理路由文件
+import customerConfig from './customer' // 引入视频管理路由文件
+import configConfig from './config' // 引入视频管理路由文件
+
 
 import pluginsConfig from './plugin'
 import Utils from '@/lin/util/util'
@@ -57,6 +60,8 @@ let homeRouter = [
   typeConfig,
   swipeConfig,
   readConfig,
+  customerConfig,
+  configConfig,
 ]
 
 const plugins = [...pluginsConfig]
