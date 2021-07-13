@@ -8,7 +8,6 @@ import readConfig from './read' // 引入视频管理路由文件
 import customerConfig from './customer' // 引入视频管理路由文件
 import configConfig from './config' // 引入视频管理路由文件
 
-
 import pluginsConfig from './plugin'
 import Utils from '@/lin/util/util'
 

@@ -37,7 +37,6 @@ export default {
         { prop: 'position', label: '公司职位' },
         { prop: 'issendemail', label: '是否发送邮件' },
         { prop: 'ismember', label: '是否是会员' },
-
       ],
       tableData: [],
       pagination: {
@@ -65,7 +64,7 @@ export default {
         }
       }
     },
-    rowClick() {}
+    rowClick() {},
   },
   watch: {},
 }

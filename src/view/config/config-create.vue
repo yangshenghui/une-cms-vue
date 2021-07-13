@@ -31,7 +31,7 @@ export default {
       form: {
         type: '',
         value: '',
-      }
+      },
     }
   },
   methods: {
@@ -56,7 +56,7 @@ export default {
     resetForm(formName) {
       this.$refs[formName].resetFields()
     },
-  }
+  },
 }
 </script>
 
