@@ -8,7 +8,7 @@
             <el-form-item label="属性" prop="type">
               <el-input size="medium" v-model="form.type" placeholder="请填写配置属性"></el-input>
             </el-form-item>
-            <el-form-item label="名称" prop="type">
+            <el-form-item label="名称" prop="name">
               <el-input size="medium" v-model="form.name" placeholder="请填写配置名称"></el-input>
             </el-form-item>
             <el-form-item label="值" prop="value">
