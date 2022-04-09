@@ -51,7 +51,7 @@ export default {
   },
   data() {
     return {
-      actionUrl: 'https://upload-z2.qiniup.com',
+      actionUrl: 'https://up-z0.qiniup.com',
       postData: {},
       imageUrl: '',
       form: {
@@ -60,7 +60,7 @@ export default {
         order: '',
       },
       loading: false,
-      qiniuSite: 'http://une.sven-it.com/',
+      qiniuSite: 'http://cdn.unechannel.com/',
     }
   },
   async mounted() {

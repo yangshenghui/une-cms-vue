@@ -36,6 +36,7 @@ export default {
       tableColumn: [
         { prop: 'id', label: '序号' },
         { prop: 'type', label: '配置属性' },
+        { prop: 'name', label: '配置名称' },
         { prop: 'value', label: '配置值' },
       ],
       tableData: [],

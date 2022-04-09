@@ -11,6 +11,9 @@
             <el-form-item label="配置属性" prop="type">
               <el-input size="medium" v-model="form.type" placeholder="请填写配置属性"></el-input>
             </el-form-item>
+            <el-form-item label="配置名称" prop="type">
+              <el-input size="medium" v-model="form.name" placeholder="请填写配置名称"></el-input>
+            </el-form-item>
             <el-form-item label="配置值" prop="value">
               <el-input size="medium" v-model="form.value" placeholder="请填写配置值"></el-input>
             </el-form-item>
@@ -38,6 +41,7 @@ export default {
     return {
       form: {
         type: '',
+        name: '',
         value: '',
       },
       loading: false,
