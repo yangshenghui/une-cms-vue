@@ -43,9 +43,13 @@
                 />
               </div>
             </el-form-item>
-            <el-form-item label="视频单价" prop="price">
-              <el-input size="medium" v-model="form.price" placeholder="请填写视频单价"></el-input>
+            <el-form-item label="视频费用" prop="vip">
+              <el-radio v-model="form.vip" label="1">免费</el-radio>
+              <el-radio v-model="form.vip" label="2">会员专享</el-radio>
             </el-form-item>
+            <!--<el-form-item label="视频单价" prop="price">
+              <el-input size="medium" v-model="form.price" placeholder="请填写视频单价"></el-input>
+            </el-form-item>-->
             <el-form-item class="submit">
               <el-button type="primary" @click="submitForm('form')">保 存</el-button>
               <el-button @click="resetForm('form')">重 置</el-button>
@@ -84,6 +88,7 @@ export default {
         url: '',
         pdfurl: '',
         price: '',
+        vip: '',
       },
       loading: false,
       qiniuSite: 'http://cdn.unechannel.com/',

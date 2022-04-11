@@ -37,6 +37,7 @@ export default {
         { prop: 'id', label: '序号' },
         { prop: 'name', label: '资料名称' },
         { prop: 'url', label: '资料链接' },
+        { prop: 'vipName', label: '资料费用' },
       ],
       tableData: [],
       operate: [],
@@ -50,6 +51,7 @@ export default {
     }
   },
   async created() {
+      console.log(this.tableData)
     this.loading = true
     await this.getReads()
     this.operate = [
@@ -67,7 +69,6 @@ export default {
     async getReads() {
       try {
         const reads = await read.getReads()
-        console.log(reads)
         this.pagination.pageTotal = reads.count
         this.tableData = reads.rows
       } catch (error) {
@@ -77,7 +78,6 @@ export default {
       }
     },
     handleEdit(val) {
-      console.log('val', val)
       this.showEdit = true
       this.editReadID = val.row.id
     },

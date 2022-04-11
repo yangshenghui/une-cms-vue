@@ -39,7 +39,7 @@ export default {
         { prop: 'author', label: '视频作者' },
         { prop: 'author', label: '视频封面' },
         { prop: 'url', label: '视频链接' },
-        { prop: 'price', label: '视频单价(元)' },
+        { prop: 'vipName', label: '视频费用' },
       ],
       tableData: [],
       operate: [],

@@ -11,6 +11,10 @@
             <el-form-item label="资料链接" prop="url">
               <el-input size="medium" v-model="form.url" placeholder="请填写资料链接"></el-input>
             </el-form-item>
+            <el-form-item label="资料费用" prop="vip">
+              <el-radio v-model="form.vip" label="1">免费</el-radio>
+              <el-radio v-model="form.vip" label="2">会员专享</el-radio>
+            </el-form-item>
             <el-form-item class="submit">
               <el-button type="primary" @click="submitForm('form')" :loading="loading">保 存</el-button>
               <el-button @click="resetForm('form')">重 置</el-button>
@@ -31,14 +35,13 @@ export default {
       form: {
         name: '',
         url: '',
+        vip: '1',
       },
       loading: false,
     }
   },
   methods: {
     async submitForm(formName) {
-      console.log('表单的值')
-      console.log(this.form)
       try {
         this.loading = true
         const res = await read.createRead(this.form)

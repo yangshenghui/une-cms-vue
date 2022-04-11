@@ -58,8 +58,9 @@
                 <tinymce @change="tinymceChange" upload_url="http://localhost:5000/cms/file/" />
               </div>
             </el-form-item>
-            <el-form-item label="视频单价(元)" prop="price">
-              <el-input size="medium" v-model="form.price" placeholder="请填写视频单价"></el-input>
+            <el-form-item label="视频费用" prop="vip">
+              <el-radio v-model="form.vip" label="1">免费</el-radio>
+              <el-radio v-model="form.vip" label="2">会员专享</el-radio>
             </el-form-item>
             <el-form-item class="submit">
               <el-button type="primary" @click="submitForm('form')" :loading="loading">保 存</el-button>
@@ -95,7 +96,7 @@ export default {
         image: '',
         url: '',
         pdfurl: '',
-        price: '',
+        vip: '1',
       },
       types: [],
       loading: false,
@@ -149,8 +150,6 @@ export default {
       this.form.summary = val
     },
     async submitForm(formName) {
-      console.log('表单的值')
-      console.log(this.form)
       try {
         this.loading = true
         const res = await vedio.createVedio(this.form)
